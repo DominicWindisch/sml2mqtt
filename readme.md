@@ -237,3 +237,21 @@ devices:
 general:
   max wait: 120  # Time in seconds sml2mqtt waits for a value change until the value gets republished
 ```
+
+Place in `/etc/systemd/system/sml2mqtt.service`:
+```
+[Unit]
+Description=sml2mqtt
+Documentation=https://github.com/spacemanspiff2007/sml2mqtt
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=2min
+ExecStart=/opt/sml2mqtt/venv/bin/sml2mqtt -c /opt/sml2mqtt/venv/config.yml
+
+[Install]
+WantedBy=multi-user.target
+```
+```
